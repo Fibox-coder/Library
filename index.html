@@ -16,7 +16,7 @@
 
   <main>
 
-    <h3> + Add book </h3>
+    <h3 id="add-book"> + Add book </h3>
     <div class="grid-container" id="grid-books">
       <div class="book-card">
         <h4>A Game Of Thrones</h4>
@@ -25,7 +25,6 @@
         <button class="read">Not Read</button>
         <button class="remove">Remove</button>
       </div>
-
       <div class="book-card">
         <h4>A Game Of Thrones</h4>
         <p>By: George R. R. Martin</p>
@@ -33,7 +32,13 @@
         <button class="read">Not Read</button>
         <button class="remove">Remove</button>
       </div>
-
+      <div class="book-card">
+        <h4>A Game Of Thrones</h4>
+        <p>By: George R. R. Martin</p>
+        <p>Number of pages: 694</p>
+        <button class="read">Not Read</button>
+        <button class="remove">Remove</button>
+      </div>
       <div class="book-card">
         <h4>A Game Of Thrones</h4>
         <p>By: George R. R. Martin</p>
@@ -49,6 +54,44 @@
       <img class="icon" src="images/github.svg" alt="Github Icon">
     </a>
   </footer>
+
+  <div class="modal active" id="addBookModal">
+    <form action="#">
+      <h3> Add new book </h3>
+      <input
+        class="bar"
+        type="text"
+        name="title"
+        id="title"
+        placeholder="Title"
+        required
+      />
+      <input
+        class="bar"
+        type="text"
+        name="author"
+        id="author"
+        placeholder="Author"
+        required
+      />
+      <input
+        class="bar"
+        type="number"
+        name="pages"
+        id="pages"
+        placeholder="Pages"
+        min="0" max="100000"
+        required
+      />
+      <div class="is-read">
+        <label for="is-read"> Have you read the book?</label>
+        <input type="checkbox" id="is-read" name="is-read" value="is-read">
+      </div>
+      <input id="submitBtn" class="SubmitBtn" type="submit" value="Submit"/>
+    </form>
+    </div>
+  
+  <div class="overlay active" id="addOverlay"></div>
 
   <script src="main.js"></script>
 </body>
