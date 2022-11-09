@@ -42,7 +42,7 @@
   </footer>
 
   <div class="modal active" id="addBookModal">
-    <form action="#">
+    <form id="formData" onsubmit="return false">
       <h3> Add new book </h3>
       <input
         class="bar"
@@ -50,7 +50,7 @@
         name="title"
         id="title"
         placeholder="Title"
-        required
+        maxlength="20"
       />
       <input
         class="bar"
@@ -58,7 +58,6 @@
         name="author"
         id="author"
         placeholder="Author"
-        required
       />
       <input
         class="bar"
@@ -67,11 +66,10 @@
         id="pages"
         placeholder="Pages"
         min="0" max="100000"
-        required
       />
       <div class="is-read">
-        <label for="is-read"> Have you read the book?</label>
-        <input type="checkbox" id="is-read" name="is-read" value="is-read">
+        <label for="isRead"> Have you read the book?</label>
+        <input type="checkbox" id="isRead" name="isRead">
       </div>
       <input id="submitBtn" class="SubmitBtn" type="submit" value="Submit"/>
     </form>

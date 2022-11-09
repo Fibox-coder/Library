@@ -4,7 +4,8 @@ const overlay = document.getElementById("addOverlay")
 const submit = document.getElementById("submitBtn")
 const gridBooks = document.getElementById("grid-books")
 
-hasReadIt = true
+haveRead = false
+let bookId = 0
 let myLibrary = []
 
 function Book(title, author, pages, haveRead){
@@ -18,13 +19,18 @@ let bookOne = new Book('The Hobbit', 'J.R.R. Tolkien', '295', 'not read yet')
 let bookTwo = new Book('Game of Thrones', 'George R. R. Martin', '694 pages', 'not read yet')
 
 
-function addBookToLibrary(){
-  myLibrary.push(bookOne)
-  myLibrary.push(bookTwo)
-  }
-  addBookToLibrary()
-  console.log(myLibrary)
 
+myLibrary.push(bookOne)
+myLibrary.push(bookTwo)
+
+function addBookToLibrary(){
+  const nextBook = getInput()
+  myLibrary.push(nextBook)
+  console.log(myLibrary) 
+  showBook(nextBook)
+  }
+
+  // Creates the layout for one Book
   function showBook(book){
     let bookCard = document.createElement('div')
     let title = document.createElement('h4')
@@ -38,13 +44,21 @@ function addBookToLibrary(){
     readBtn.classList.add('read')
     removeBtn.classList.add('remove')
 
+    bookCard.setAttribute("id", 1);
+    // bookCard.setAttribute("id", bookId);
+    // if (this.parentNode.id === bookId){
+    //   bookID += 1
+    // }
+    
+    
+
     title.textContent = `${book.title}`
     author.textContent = `By: ${book.author}`
-    pages.textContent = `number of pages: ${bookOne.pages}`
+    pages.textContent = `number of pages: ${book.pages}`
     removeBtn.textContent = "Remove"
 
 
-      if (hasReadIt === true){
+      if (haveRead === true){
         readBtn.textContent = "Read"
         readBtn.style.cssText = "background-color: lightgreen;"
       } else {
@@ -58,14 +72,26 @@ function addBookToLibrary(){
     bookCard.appendChild(pages)
     bookCard.appendChild(readBtn)
     bookCard.appendChild(removeBtn)
-  }
-showBook(bookOne)
-showBook(bookTwo)
 
-function bookCard(){
-  let bookCard = document.createElement('div');
-  bookCard.classList.add('book-card');
-  gridBooks.appendChild(bookCard);
+    removeBtn.onclick = function(){
+      // console.log(this)
+      console.log(this.parentNode)
+      console.log(this.parentNode.id)
+      // removeBtn.parentElement.remove();
+      // myLibrary.splice(0,1); // Have to find a way to get the selected Book
+      // console.log(myLibrary)
+      }
+  }
+  showBook(bookOne)
+  showBook(bookTwo)
+
+
+function  getInput(){
+const title = document.getElementById('title').value
+const author = document.getElementById('author').value
+const pages = document.getElementById('pages').value
+const isRead = document.getElementById('isRead').checked
+return new Book(title, author, pages, isRead)
 }
 
 // When the user clicks the button, open the modal and overlay
@@ -82,6 +108,19 @@ window.onclick = function(event) {
   }
 }
 
-submit.onclick = function(){
-  console.log('test')
+// Sets Form back to 0
+function resetForm(){
+  document.getElementById("formData").reset()
+  modal.style.display = "none";
+  overlay.style.display = "none";
 }
+
+// After pressing Submit, adds the book
+submit.onclick = function(){
+  if(title.value === "" || author.value === "" || pages.value === ""){
+    return false
+  } else {
+  addBookToLibrary()
+  resetForm()
+}}
+
