@@ -3,9 +3,8 @@ const modal = document.getElementById("addBookModal")
 const overlay = document.getElementById("addOverlay")
 const submit = document.getElementById("submitBtn")
 const gridBooks = document.getElementById("grid-books")
+let removeBtn = document.createElement('button')
 
-haveRead = false
-let bookId = 0
 let myLibrary = []
 
 function Book(title, author, pages, haveRead){
@@ -14,10 +13,8 @@ function Book(title, author, pages, haveRead){
   this.pages = pages
   this.haveRead = haveRead
 }
-
-let bookOne = new Book('The Hobbit', 'J.R.R. Tolkien', '295', 'not read yet')
-let bookTwo = new Book('Game of Thrones', 'George R. R. Martin', '694 pages', 'not read yet')
-
+let bookOne = new Book('The Hobbit', 'J.R.R. Tolkien', '295', false)
+let bookTwo = new Book('Game of Thrones', 'George R. R. Martin', '694 pages', true)
 
 
 myLibrary.push(bookOne)
@@ -27,30 +24,24 @@ function addBookToLibrary(){
   const nextBook = getInput()
   myLibrary.push(nextBook)
   console.log(myLibrary) 
-  showBook(nextBook)
+  createBookItem(nextBook)
   }
 
   // Creates the layout for one Book
-  function showBook(book){
+  function createBookItem(book, index){
     let bookCard = document.createElement('div')
     let title = document.createElement('h4')
     let author = document.createElement('p')
     let pages = document.createElement('p')
     let readBtn = document.createElement('button')
     let removeBtn = document.createElement('button')
+   
 
+    bookCard.setAttribute('id', index)
 
     bookCard.classList.add('book-card')
     readBtn.classList.add('read')
-    removeBtn.classList.add('remove')
-
-    bookCard.setAttribute("id", 1);
-    // bookCard.setAttribute("id", bookId);
-    // if (this.parentNode.id === bookId){
-    //   bookID += 1
-    // }
-    
-    
+    removeBtn.classList.add('remove') 
 
     title.textContent = `${book.title}`
     author.textContent = `By: ${book.author}`
@@ -58,7 +49,7 @@ function addBookToLibrary(){
     removeBtn.textContent = "Remove"
 
 
-      if (haveRead === true){
+      if (book.haveRead === true){
         readBtn.textContent = "Read"
         readBtn.style.cssText = "background-color: lightgreen;"
       } else {
@@ -74,17 +65,28 @@ function addBookToLibrary(){
     bookCard.appendChild(removeBtn)
 
     removeBtn.onclick = function(){
-      // console.log(this)
-      console.log(this.parentNode)
-      console.log(this.parentNode.id)
+      // bookIndex = this.parentNode.id
+      // myLibrary.splice(bookIndex,1)
       // removeBtn.parentElement.remove();
-      // myLibrary.splice(0,1); // Have to find a way to get the selected Book
       // console.log(myLibrary)
+      console.log(index)
       }
   }
-  showBook(bookOne)
-  showBook(bookTwo)
 
+
+  removeBtn.onclick = function(){
+    // bookIndex = this.parentNode.id
+    // myLibrary.splice(bookIndex,1)
+    // removeBtn.parentElement.remove();
+    // console.log(myLibrary)
+    console.log(index)
+    }
+
+  function renderBooks(){
+    myLibrary.map(function (book, index){
+      createBookItem(book, index)
+    })
+  }
 
 function  getInput(){
 const title = document.getElementById('title').value
@@ -124,3 +126,10 @@ submit.onclick = function(){
   resetForm()
 }}
 
+// function addLocalStorage(){
+//   // myLibrary = JSON.parse(localStorage.getItem('library')) || []
+//   // renderBooks()
+// }
+
+renderBooks()
+console.log(myLibrary)
