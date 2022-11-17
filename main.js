@@ -25,6 +25,7 @@ function addBookToLibrary(){
   myLibrary.push(nextBook)
   console.log(myLibrary) 
   createBookItem(nextBook)
+  return myLibrary
   }
 
   // Creates the layout for one Book
@@ -68,19 +69,12 @@ function addBookToLibrary(){
       // bookIndex = this.parentNode.id
       // myLibrary.splice(bookIndex,1)
       // removeBtn.parentElement.remove();
-      // console.log(myLibrary)
+      console.log(myLibrary)
       console.log(index)
       }
   }
 
 
-  removeBtn.onclick = function(){
-    // bookIndex = this.parentNode.id
-    // myLibrary.splice(bookIndex,1)
-    // removeBtn.parentElement.remove();
-    // console.log(myLibrary)
-    console.log(index)
-    }
 
   function renderBooks(){
     myLibrary.map(function (book, index){
