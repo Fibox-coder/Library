@@ -221,3 +221,18 @@ input[type='checkbox']:checked:after {
   box-shadow: 0px 0px 5px 1px white;
   cursor: pointer;
 }
+
+
+@media (max-width: 1100px){
+  .grid-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+}
+
+@media (max-width: 750px){
+  .grid-container{
+    grid-template-columns: 1fr;
+  }
+}
